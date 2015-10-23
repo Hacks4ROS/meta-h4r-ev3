@@ -1,0 +1,11 @@
+--- git/cmake/ValaPrecompile.cmake        2015-09-06 13:38:09.717281727 +0200
++++ git/cmake/ValaPrecompile.cmake       2015-09-06 13:39:15.621283572 +0200
+@@ -223,7 +223,7 @@
+ 
+     set(gir_arguments "")
+     set(gircomp_command "")
+-    if(ARGS_GENERATE_GIR)
++    if(false) #if(ARGS_GENERATE_GIR)
+         parse_arguments(ARGS_GENERATE_GIR "" "TYPELIB" ${ARGS_GENERATE_GIR})
+         list(APPEND out_files "${DIRECTORY}/${ARGS_GENERATE_GIR_DEFAULT_ARGS}.gir")
+         list(APPEND out_files_display "${ARGS_GENERATE_GIR_DEFAULT_ARGS}.gir")

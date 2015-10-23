@@ -1,0 +1,11 @@
+--- git/lib/ev3devKit/CMakeLists.txt     2015-09-06 23:46:24.470303454 +0200
++++ git/lib/ev3devKit/CMakeLists.txt      2015-09-06 23:46:11.082303079 +0200
+@@ -151,7 +151,7 @@
+     link_directories (${DESKTOP_DEPS_LIBRARY_DIRS})
+ endif (EV3DEVKIT_DESKTOP)
+ 
+-link_libraries (grx20 m)
++link_libraries (grx20 m png)
+ 
+ find_package (Vala REQUIRED)
+ include (ValaVersion)

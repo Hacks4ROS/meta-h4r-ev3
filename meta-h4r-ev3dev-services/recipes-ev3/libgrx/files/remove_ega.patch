@@ -1,0 +1,16 @@
+--- grx249/src/makefile.lnx	2015-09-01 21:53:51.371841243 +0200
++++ grx249/src/makefile.n.lnx	2015-09-01 21:52:04.255839288 +0200
+@@ -98,13 +98,6 @@
+ 	mouse/lnxkeys.o         \
+ 	misc/lnxmisc.o
+ 
+-ifeq ($(BUILD_X86_64),n)
+-  O += fdrivers/egavga1.o      \
+-	fdrivers/ega4.o         \
+-	fdrivers/svga4.o        \
+-	fdrivers/vga8x.o
+-endif
+-
+ ifeq ($(INCLUDE_BGI_SUPPORT),y)
+   O += $(BGI_O)
+ endif

@@ -1,0 +1,13 @@
+[Unit]
+Description=Brick Manager
+Conflicts=getty@tty1.service
+After=systemd-user-sessions.service getty@tty1.service
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/brickman
+StandardInput=tty
+TTYPath=/dev/tty1
+
+[Install]
+Alias=display-manager.service

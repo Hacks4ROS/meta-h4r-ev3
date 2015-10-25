@@ -11,6 +11,10 @@ KERNEL_MODULES += " \
     kernel-modules \
 "
 
+SYSTEM_ADDONS = " \
+	connman \
+"
+
 ROS =" \
     packagegroup-ros-comm \
     actionlib \
@@ -110,6 +114,7 @@ ROS =" \
 EV3 ="\
 	libgee   \
 	libgrx   \
+	brickman \
 	ev3systemd \
 	ev3firmware \
 	ev3dev-lang-cpp \
@@ -244,6 +249,7 @@ DEV_SDK_INSTALL = " \
 
 
 IMAGE_INSTALL += " \
+    ${SYSTEM_ADDONS} \
     ${EV3} \
     ${ROS} \
     ${UPDATE_EXTRA} \

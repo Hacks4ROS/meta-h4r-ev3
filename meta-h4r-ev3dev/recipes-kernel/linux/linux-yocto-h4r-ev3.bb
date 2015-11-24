@@ -14,7 +14,7 @@ SRC_URI += "file://meta-h4r-ev3dev.scc \
 LINUX_VERSION ?= "3.16.7"
 LINUX_VERSION_EXTENSION ?= "-h4r-ev3dev"
 
-SRCREV="${AUTOREV}"
+SRCREV="d18d681e8667139353eac364e460a70ba29c9559"
 
 PR = "r0"
 PV = "${LINUX_VERSION}+git${SRCPV}"

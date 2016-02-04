@@ -1,0 +1,69 @@
+From b8c043c1c6290065e3028f48c6080ddad26613f1 Mon Sep 17 00:00:00 2001
+From: Christian Holl <cyborgx1@gmail.com>
+Date: Thu, 4 Feb 2016 01:44:07 +0100
+Subject: [PATCH] add h4r_ev3 logo
+
+---
+ drivers/video/logo/Kconfig  | 5 +++++
+ drivers/video/logo/Makefile | 1 +
+ drivers/video/logo/logo.c   | 3 +++
+ include/linux/linux_logo.h  | 1 +
+ 4 files changed, 10 insertions(+)
+
+diff --git a/drivers/video/logo/Kconfig b/drivers/video/logo/Kconfig
+index ef9d62c..50aa326 100644
+--- a/drivers/video/logo/Kconfig
++++ b/drivers/video/logo/Kconfig
+@@ -32,6 +32,11 @@ config LOGO_EV3DEV_MONO
+ 	depends on MACH_DAVINCI_LEGOEV3
+ 	default y
+ 
++config LOGO_H4R_EV3_MONO
++   bool "h4r black and white logo"
++   depends on MACH_DAVINCI_LEGOEV3
++   default y
++
+ config LOGO_EV3DEV_CLUT224
+ 	bool "ev3dev color logo"
+ 	depends on MACH_DAVINCI_LEGOEV3
+diff --git a/drivers/video/logo/Makefile b/drivers/video/logo/Makefile
+index 3db1617..d6f7584 100644
+--- a/drivers/video/logo/Makefile
++++ b/drivers/video/logo/Makefile
+@@ -6,6 +6,7 @@ obj-$(CONFIG_LOGO_LINUX_VGA16)		+= logo_linux_vga16.o
+ obj-$(CONFIG_LOGO_LINUX_CLUT224)	+= logo_linux_clut224.o
+ obj-$(CONFIG_LOGO_EV3DEV_MONO)		+= logo_ev3dev_mono.o
+ obj-$(CONFIG_LOGO_EV3DEV_CLUT224)	+= logo_ev3dev_clut224.o
++obj-$(CONFIG_LOGO_H4R_EV3_MONO)		+= logo_h4r_ev3_mono.o
+ obj-$(CONFIG_LOGO_BLACKFIN_CLUT224)	+= logo_blackfin_clut224.o
+ obj-$(CONFIG_LOGO_BLACKFIN_VGA16)	+= logo_blackfin_vga16.o
+ obj-$(CONFIG_LOGO_DEC_CLUT224)		+= logo_dec_clut224.o
+diff --git a/drivers/video/logo/logo.c b/drivers/video/logo/logo.c
+index 004494a..63923f1 100644
+--- a/drivers/video/logo/logo.c
++++ b/drivers/video/logo/logo.c
+@@ -51,6 +51,9 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
+ #ifdef CONFIG_LOGO_EV3DEV_MONO
+ 		logo = &logo_ev3dev_mono;
+ #endif
++#ifdef CONFIG_LOGO_H4R_EV3_MONO
++       logo = &logo_h4r_ev3_mono;
++#endif
+ #ifdef CONFIG_LOGO_LINUX_MONO
+ 		/* Generic Linux logo */
+ 		logo = &logo_linux_mono;
+diff --git a/include/linux/linux_logo.h b/include/linux/linux_logo.h
+index b7e5d41..35aa765 100644
+--- a/include/linux/linux_logo.h
++++ b/include/linux/linux_logo.h
+@@ -37,6 +37,7 @@ extern const struct linux_logo logo_linux_vga16;
+ extern const struct linux_logo logo_linux_clut224;
+ extern const struct linux_logo logo_ev3dev_mono;
+ extern const struct linux_logo logo_ev3dev_clut224;
++extern const struct linux_logo logo_h4r_ev3_mono;
+ extern const struct linux_logo logo_blackfin_vga16;
+ extern const struct linux_logo logo_blackfin_clut224;
+ extern const struct linux_logo logo_dec_clut224;
+-- 
+1.9.1
+

@@ -2,6 +2,8 @@ DESCRIPTION = "A image for the Lego ev3 brick"
 include recipes-core/images/core-image-minimal.bb
 inherit extrausers
 
+
+DISTRO_NAME = "H4R-EV3 Yocto (http://github.com/Hacks4ROS)"
 MACHINE = "ev3dev"
 IMAGE_FEATURES += " package-management"
 EXTRA_IMAGE_FEATURES += " empty-root-password"
@@ -119,7 +121,10 @@ EV3 ="\
 	ev3firmware \
 	ev3dev-lang-cpp \
 	ev3dev-lang-cpp-examples \
-	h4r-ev3-ctrl\
+	h4r-ev3-control \
+	h4r-ev3-manager \
+	h4r-ev3-msgs \ 
+	h4r-ev3-launch \
 "	
 
 REMOTE="\
@@ -264,6 +269,7 @@ IMAGE_INSTALL += " \
     ${REMOTE} \
     vsftpd \
     inetutils \
+    bash \
 "
 
 set_env_path_files() {

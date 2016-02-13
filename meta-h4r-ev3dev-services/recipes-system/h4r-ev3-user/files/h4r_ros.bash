@@ -134,8 +134,55 @@ echo -e $EMPTY_LINE
 echo -e "\e[00;30;47m"ev3_manager - EV3 ROS node ${LINE_END}
 echo -e "\e[00;30;47m""ros_ip_set [IP (none unsets)] - Sets ROS_IP" ${LINE_END}
 echo -e "\e[00;30;47m""ros_master_set [host] [port(optional)] - Sets ROS_MASTER_URI" ${LINE_END}
+echo -e "\e[00;30;47m""hostname_set - sets the hostname of your ev3 brick" ${LINE_END}
+echo -e "\e[00;30;47m""gadget_on - turns on gadget interface for first setup" ${LINE_END}
+
 echo -e "\n\e[0m"
 return 0
 }
+
+function gadget_on
+{
+    gadget_interface=`connmanctl services | grep -oh "gadget_[a-z0-9]*_usb"`
+    if [ "$?" != "0" ]; then clear; echo -e "Could not find gadget!\n USB Cable Connected?\n"; return 1; fi
+    
+    connmanctl enable gadget
+    connmanctl disconnect $gadget_interface
+
+    connmanctl config $gadget_interface --ipv4 manual 192.168.10.123
+    if [ "$?" != "0" ]; then clear; echo -e "Could not set config!"; return 1; fi
+    
+    connmanctl connect $gadget_interface
+    if [ "$?" != "0" ]; then clear; echo -e "Could connect Gadget!\n"; return 1; fi
+
+    clear
+    echo -e "USB Interface On!\n--------------------\nConfigure your PC to \nuse a fixed ip in the range of the IP of the\nEV3: \e[1m192.168.10.123\e[0m"
+}
+
+function hostname_set 
+{
+hn="$1";
+
+if [ "$hn" == "" ]; then
+  hn="ev3dev"
+fi
+
+echo -e "Setting hostname: $hn"
+echo -e "--------------------"
+echo -e "This will rewrite:\n -/etc/hosts\n    and\n -/etc/hostname\n"
+read -p "Are you sure[yN]? " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Writing new hostname..."
+  hostname $hn
+  echo $hn > /etc/hostname
+  echo -e "127.0.0.1       ${hn}.localdomain      localhost     ${hn} \n" > /etc/hosts  
+  echo "It is recommended to reboot now to fully apply the new hostname ..."  
+fi
+
+}
+
 
 alias ev3_manager="/opt/ros/indigo/lib/h4r_ev3_manager/ev3_manager_node"

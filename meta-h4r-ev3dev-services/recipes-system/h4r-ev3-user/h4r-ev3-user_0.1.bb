@@ -15,15 +15,14 @@ SRC_URI = "\
            file://rosenv.bash \
            "
            
-S = ${WORKDIR}
+S = "${WORKDIR}"
            
 do_configure() {
 
 }
 
-
-do_install() 
-{    
+do_install() {
+    
     install -d ${D}${sysconfdir}/h4r_ev3_scripts
     
     for f in ${S}/*; do
